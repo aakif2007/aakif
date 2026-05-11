@@ -74,12 +74,73 @@
     .restart-btn:hover {
       background: #fb8c00;
     }
+  
+    .welcome-title {
+      font-size: 2.2rem;
+      color: #ff4081;
+      animation: bounce 2s infinite;
+    }
+
+    .mentor-name {
+      color: #7b1fa2;
+      margin-bottom: 20px;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    .welcome-images {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      font-size: 3rem;
+      margin: 20px 0;
+      animation: floatIcons 3s infinite alternate;
+    }
+
+    #start-btn {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      background: linear-gradient(45deg, #ff6f61, #ffca28);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    #start-btn:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes floatIcons {
+      from { transform: translateY(0); }
+      to { transform: translateY(-15px); }
+    }
   </style>
 </head>
 <body>
   <div class="quiz-container">
-    <h1>🎨 Kids Colors Quiz 🎨</h1>
-    <div id="quiz">
+    <div id="welcome-screen">
+      <h1 class="welcome-title">🌈 Welcome to ILTES KIDS 🌈</h1>
+      <h2 class="mentor-name">Mentor: Masna 🌟</h2>
+      <div class="welcome-images">
+        <div class="star">⭐</div>
+        <div class="rainbow">🌈</div>
+        <div class="apple">🍎</div>
+        <div class="balloon">🎈</div>
+      </div>
+      <button id="start-btn">Start Quiz</button>
+    </div>
+    <div id="quiz" style="display:none;">
       <div class="question" id="question">What color is this?</div>
       <div class="color-box" id="colorBox"></div>
       <div class="answers" id="answers"></div>
@@ -133,7 +194,11 @@
       currentQuestion++;
 
       if (currentQuestion < questions.length) {
-        loadQuestion();
+        document.getElementById('start-btn').addEventListener('click', () => {
+      document.getElementById('welcome-screen').style.display = 'none';
+      document.getElementById('quiz').style.display = 'block';
+      loadQuestion();
+    });
       } else {
         showResults();
       }
