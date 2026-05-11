@@ -125,10 +125,39 @@
       from { transform: translateY(0); }
       to { transform: translateY(-15px); }
     }
+  
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .loading-apple {
+      font-size: 5rem;
+      animation: spinBounce 2s infinite;
+    }
+
+    @keyframes spinBounce {
+      0% { transform: rotate(0deg) translateY(0); }
+      50% { transform: rotate(180deg) translateY(-20px); }
+      100% { transform: rotate(360deg) translateY(0); }
+    }
   </style>
 </head>
 <body>
-  <div class="quiz-container">
+  <div id="loading-screen">
+    <div class="loading-apple">🍎</div>
+    <h2>Loading ILTES KIDS...</h2>
+  </div>
+  <div class="quiz-container" style="display:none;">
     <div id="welcome-screen">
       <h1 class="welcome-title">🌈 Welcome to ILTES KIDS 🌈</h1>
       <h2 class="mentor-name">Mentor: Masna 🌟</h2>
@@ -195,14 +224,27 @@
 
       if (currentQuestion < questions.length) {
         document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('welcome-screen').style.display = 'block';
-      document.getElementById('quiz').style.display = 'none';
+      const loadingScreen = document.getElementById('loading-screen');
+      const quizContainer = document.querySelector('.quiz-container');
+      const welcomeScreen = document.getElementById('welcome-screen');
+      const quizScreen = document.getElementById('quiz');
 
-      document.getElembtn').addEventListener('click', () => {
-        document.getElementById('welcome-screen').style.display = 'none';
-        document.getElementById('quiz').style.display = 'block';
+      quizContainer.style.display = 'none';
+      welcomeScreen.style.display = 'none';
+      quizScreen.style.display = 'none';
+
+      setTimeout(() => {
+        loadingScreen.style.display = 'none';
+        quizContainer.style.display = 'block';
+        welcomeScreen.style.display = 'block';
+      }, 3000);
+
+      document.getElementById('start-btn').addEventListener('click', () => {
+        welcomeScreen.style.display = 'none';
+        quizScreen.style.display = 'block';
         loadQuestion();
       });
+    });
     });
       } else {
         showResults();
