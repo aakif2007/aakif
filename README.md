@@ -199,6 +199,9 @@
     const questionText = document.getElementById('question');
 
     function loadQuestion() {
+      const colorBox = document.getElementById('colorBox');
+      const answersDiv = document.getElementById('answers');
+      const questionText = document.getElementById('question');
       const q = questions[currentQuestion];
       questionText.textContent = q.question;
       colorBox.style.backgroundColor = q.color;
@@ -242,6 +245,13 @@
       document.getElementById('start-btn').addEventListener('click', () => {
         welcomeScreen.style.display = 'none';
         quizScreen.style.display = 'block';
+
+        quizScreen.innerHTML = `
+          <div class="question" id="question">What color is this?</div>
+          <div class="color-box" id="colorBox"></div>
+          <div class="answers" id="answers"></div>
+        `;
+
         loadQuestion();
       });
     });
