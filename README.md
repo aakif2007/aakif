@@ -194,10 +194,15 @@
       currentQuestion++;
 
       if (currentQuestion < questions.length) {
-        document.getElementById('start-btn').addEventListener('click', () => {
-      document.getElementById('welcome-screen').style.display = 'none';
-      document.getElementById('quiz').style.display = 'block';
-      loadQuestion();
+        document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('welcome-screen').style.display = 'block';
+      document.getElementById('quiz').style.display = 'none';
+
+      document.getElembtn').addEventListener('click', () => {
+        document.getElementById('welcome-screen').style.display = 'none';
+        document.getElementById('quiz').style.display = 'block';
+        loadQuestion();
+      });
     });
       } else {
         showResults();
