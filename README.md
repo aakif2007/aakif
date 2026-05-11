@@ -186,23 +186,18 @@
       { type: 'color', color: 'green', question: 'What color is this?', options: ['Green', 'Black', 'Brown', 'White'], answer: 'Green' },
       { type: 'object', color: 'orange', question: 'What is the color of an orange fruit?', options: ['Purple', 'Orange', 'Blue', 'Pink'], answer: 'Orange' },
       { type: 'color', color: 'yellow', question: 'What color is this?', options: ['Red', 'Yellow', 'Gray', 'Blue'], answer: 'Yellow' },
-      { type: 'object', color: 'purple', question: 'What is the color of grapes?', options: ['Purple', 'Green', 'Orange', 'Red'], answer: 'Purple' },
-      { type: 'color', color: 'purple', question: 'What color is this?', options: ['Purple', 'Green', 'Orange', 'Red'], answer: 'Purple' }
+      { type: 'object', color: 'purple', question: 'What is the color of grapes?', options: ['Purple', 'Green', 'Orange', 'Red'], answer: 'Purple' }
     ];
 
     let currentQuestion = 0;
     let score = 0;
 
-    const colorBox = document.getElementById('colorBox');
-    const answersDiv = document.getElementById('answers');
-    const scoreDiv = document.getElementById('score');
-    const questionText = document.getElementById('question');
-
     function loadQuestion() {
+      const q = questions[currentQuestion];
       const colorBox = document.getElementById('colorBox');
       const answersDiv = document.getElementById('answers');
       const questionText = document.getElementById('question');
-      const q = questions[currentQuestion];
+
       questionText.textContent = q.question;
       colorBox.style.backgroundColor = q.color;
       answersDiv.innerHTML = '';
@@ -220,44 +215,12 @@
         score++;
         alert('🎉 Correct!');
       } else {
-        alert('❌ Oops! Correct answer: ' + questions[currentQuestion].answer);
+        alert('❌ Correct answer: ' + questions[currentQuestion].answer);
       }
 
       currentQuestion++;
-
       if (currentQuestion < questions.length) {
-        document.addEventListener('DOMContentLoaded', () => {
-      const loadingScreen = document.getElementById('loading-screen');
-      const quizContainer = document.querySelector('.quiz-container');
-      const welcomeScreen = document.getElementById('welcome-screen');
-      const quizScreen = document.getElementById('quiz');
-
-      quizContainer.style.display = 'none';
-      welcomeScreen.style.display = 'none';
-      quizScreen.style.display = 'none';
-
-      setTimeout(() => {
-        loadingScreen.style.display = 'none';
-        quizContainer.style.display = 'block';
-        welcomeScreen.style.display = 'block';
-
-        const startBtn = document.getElementById('start-btn');
-        startBtn.onclick = function() {
-          welcomeScreen.style.display = 'none';
-          quizScreen.style.display = 'block';
-
-          quizScreen.innerHTML = `
-            <div class="question" id="question">What color is this?</div>
-            <div class="color-box" id="colorBox"></div>
-            <div class="answers" id="answers"></div>
-          `;
-
-          loadQuestion();
-        };
-      }, 3000);
-    });
-    });
-    });
+        loadQuestion();
       } else {
         showResults();
       }
@@ -274,16 +237,31 @@
     function restartQuiz() {
       currentQuestion = 0;
       score = 0;
-      document.getElementById('quiz').innerHTML = `
-        <div class="question" id="question">What color is this?</div>
-        <div class="color-box" id="colorBox"></div>
-        <div class="answers" id="answers"></div>
-      `;
-
-      window.location.reload();
+      location.reload();
     }
 
-    loadQuestion();
+    document.addEventListener('DOMContentLoaded', function() {
+      const loadingScreen = document.getElementById('loading-screen');
+      const quizContainer = document.querySelector('.quiz-container');
+      const welcomeScreen = document.getElementById('welcome-screen');
+      const quizScreen = document.getElementById('quiz');
+
+      quizContainer.style.display = 'none';
+      welcomeScreen.style.display = 'none';
+      quizScreen.style.display = 'none';
+
+      setTimeout(function() {
+        loadingScreen.style.display = 'none';
+        quizContainer.style.display = 'block';
+        welcomeScreen.style.display = 'block';
+
+        document.getElementById('start-btn').onclick = function() {
+          welcomeScreen.style.display = 'none';
+          quizScreen.style.display = 'block';
+          loadQuestion();
+        };
+      }, 3000);
+    });
   </script>
 </body>
 </html>
