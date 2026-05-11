@@ -240,20 +240,22 @@
         loadingScreen.style.display = 'none';
         quizContainer.style.display = 'block';
         welcomeScreen.style.display = 'block';
+
+        const startBtn = document.getElementById('start-btn');
+        startBtn.onclick = function() {
+          welcomeScreen.style.display = 'none';
+          quizScreen.style.display = 'block';
+
+          quizScreen.innerHTML = `
+            <div class="question" id="question">What color is this?</div>
+            <div class="color-box" id="colorBox"></div>
+            <div class="answers" id="answers"></div>
+          `;
+
+          loadQuestion();
+        };
       }, 3000);
-
-      document.getElementById('start-btn').addEventListener('click', () => {
-        welcomeScreen.style.display = 'none';
-        quizScreen.style.display = 'block';
-
-        quizScreen.innerHTML = `
-          <div class="question" id="question">What color is this?</div>
-          <div class="color-box" id="colorBox"></div>
-          <div class="answers" id="answers"></div>
-        `;
-
-        loadQuestion();
-      });
+    });
     });
     });
       } else {
