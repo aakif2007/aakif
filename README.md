@@ -89,11 +89,15 @@
 
   <script>
     const questions = [
-      { color: 'red', options: ['Red', 'Blue', 'Green', 'Yellow'], answer: 'Red' },
-      { color: 'blue', options: ['Purple', 'Orange', 'Blue', 'Pink'], answer: 'Blue' },
-      { color: 'green', options: ['Green', 'Black', 'Brown', 'White'], answer: 'Green' },
-      { color: 'yellow', options: ['Red', 'Yellow', 'Gray', 'Blue'], answer: 'Yellow' },
-      { color: 'purple', options: ['Purple', 'Green', 'Orange', 'Red'], answer: 'Purple' }
+      { type: 'color', color: 'red', question: 'What color is this?', options: ['Red', 'Blue', 'Green', 'Yellow'], answer: 'Red' },
+      { type: 'object', color: 'red', question: 'What is the color of an apple?', options: ['Red', 'Blue', 'Purple', 'White'], answer: 'Red' },
+      { type: 'color', color: 'blue', question: 'What color is this?', options: ['Purple', 'Orange', 'Blue', 'Pink'], answer: 'Blue' },
+      { type: 'object', color: 'yellow', question: 'What is the color of a banana?', options: ['Green', 'Yellow', 'Blue', 'Black'], answer: 'Yellow' },
+      { type: 'color', color: 'green', question: 'What color is this?', options: ['Green', 'Black', 'Brown', 'White'], answer: 'Green' },
+      { type: 'object', color: 'orange', question: 'What is the color of an orange fruit?', options: ['Purple', 'Orange', 'Blue', 'Pink'], answer: 'Orange' },
+      { type: 'color', color: 'yellow', question: 'What color is this?', options: ['Red', 'Yellow', 'Gray', 'Blue'], answer: 'Yellow' },
+      { type: 'object', color: 'purple', question: 'What is the color of grapes?', options: ['Purple', 'Green', 'Orange', 'Red'], answer: 'Purple' },
+      { type: 'color', color: 'purple', question: 'What color is this?', options: ['Purple', 'Green', 'Orange', 'Red'], answer: 'Purple' }
     ];
 
     let currentQuestion = 0;
@@ -106,6 +110,7 @@
 
     function loadQuestion() {
       const q = questions[currentQuestion];
+      questionText.textContent = q.question;
       colorBox.style.backgroundColor = q.color;
       answersDiv.innerHTML = '';
 
